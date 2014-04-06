@@ -1,4 +1,4 @@
 angulargo_template
 ==================
 
-Angulargo bootstrap
+Angulargo bootstrap template
