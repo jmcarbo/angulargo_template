@@ -1,0 +1,56 @@
+<html ng-app="your-app">
+<head>
+	<title>Tutorial</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+</head>
+<body ng-controller="MainCtrl">
+	<div class="jumbotron">
+		<h1>Bootstrap's working</h1>
+		<p>
+    So is <i class="fa fa-spinner fa-spin"></i> font-awesome. {{pepe}}
+		</p>
+	</div>
+	<div class="container">
+		<input type="text" placeholder="type here" ng-model="Name">
+		<p>Is Angular working? <span ng-bind="Name"></span></p>
+    <br/>
+    <input type="date" name="some_name" value="">
+    <p></p>
+    Partners {{(partners|filter:Name).length}}
+    <table class="table table-striped">
+      <tr ng-repeat="p in partners | filter:Name | limitTo:10 | orderBy:'Name'">
+        <td>
+      {{p.Name}}
+        </td>
+      </tr>
+    </table>
+    <table class="table table-striped">
+      <tr ng-repeat="i in invoices | filter:Number | limitTo: 10 |orderBy:'Number'">
+        <td>
+          {{i.Number}}
+        </td>
+      </tr>
+    </table>
+	</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular.min.js"></script>
+<script src="/underscore-min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/restangular/1.3.1/restangular.js"></script>
+<script type="text/javascript" charset="utf-8">
+  angular.module('your-app', ['restangular']);
+
+  // Inject Restangular into your controller
+  angular.module('your-app').controller('MainCtrl', function($scope, Restangular) {
+    $scope.pepe = "bla bla bla";
+    $scope.partners = Restangular.all('partners').getList().$object;
+    $scope.invoices = Restangular.all('invoices').getList().$object;
+        // ...
+      });
+
+  function bla($scope){
+    $scope.pepe = "bla bla bla";
+  }
+</script>
+</body>
+</html>
